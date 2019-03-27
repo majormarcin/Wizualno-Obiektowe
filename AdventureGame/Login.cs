@@ -9,28 +9,48 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
 namespace AdventureGame
 {
     public partial class Login : Form
     {
+        List<User> list;
         public Login()
         {
+            //konstruktory klas
+            // u= new User("admin","abc123!",true);
+            list = new List<User>();
+            list.Add(new User("admin", "abc123!", true));
+            list.Add(new User("mz", "abc123!", true));
+            list.Add(new User("user", "user", false));
+
+            
+
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            //odpowiednik form1load
+            //User[] us = new User[4];
+            // us[0] = new User("admin", "abc123!", true);
+            foreach (User u in list)
+            {
+                if (u.UserName == textBox_login.Text)
+                {
+                    Form f = new Form1(this,u.UserName,u.isAdmin);
+                    f.Show();
+                    this.Hide();
+                    break;
+                }
+            }
 
         }
-        private void polaczenie()
+
+        private void button2_Click(object sender, EventArgs e)
         {
-            string connetionString;
-            SqlConnection cnn;
-            connetionString = @"Data Source=WIN-50GP30FGO75;Initial Catalog=Demodb;User ID=sa;Password=demol23";
-            cnn = new SqlConnection(connetionString);
-            cnn.Open();
-            MessageBox.Show("Connection Open  !");
-            cnn.Close();
+            
         }
     }
 }
