@@ -16,5 +16,11 @@ namespace AdventureGame
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var loginForm = new Login();
+            loginForm.Show();
+        }
     }
 }
