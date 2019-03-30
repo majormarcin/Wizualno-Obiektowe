@@ -12,22 +12,23 @@ namespace AdventureGame
 {
     public partial class Form1 : Form
     {
-        public Form1(Form f,string UserName, bool isAdmin)
+        Login logowanie;
+        public Form1(Login logowanie2,string UserName, bool isAdmin)
         {
+            //logowanie = logowanie2;
             InitializeComponent();
             label1.Text = UserName;
-
-        }
-        Form1 f;
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Form loginForm = new Login();
-            loginForm.Show();
+            checkBox1.Checked = isAdmin;
+           //logowanie.Close();
         }
 
-        private void Form1_ForeColorChanged(object sender, EventArgs e)
+
+
+        public void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
+            this.Hide();
+            Form f = new Login();
+            f.Closed += (s, args) => this.Close();
             f.Show();
         }
     }

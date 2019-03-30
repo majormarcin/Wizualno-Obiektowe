@@ -21,8 +21,8 @@ namespace AdventureGame
             //konstruktory klas
             // u= new User("admin","abc123!",true);
             list = new List<User>();
-            list.Add(new User("admin", "abc123!", true));
-            list.Add(new User("mz", "abc123!", true));
+            list.Add(new User("admin", "abc123", true));
+            list.Add(new User("MZ", "TuJestSkomplikowaneHaslo", true));
             list.Add(new User("user", "user", false));
 
             
@@ -37,12 +37,15 @@ namespace AdventureGame
             // us[0] = new User("admin", "abc123!", true);
             foreach (User u in list)
             {
-                if (u.UserName == textBox_login.Text)
+                if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text)==true)
                 {
-                    Form f = new Form1(this,u.UserName,u.isAdmin);
-                    f.Show();
+                    
                     this.Hide();
+                    Form1 f = new Form1(this,u.UserName,u.isAdmin);
+                    //f.Closed += (s, args) => this.Close();
+                    f.Show();
                     break;
+
                 }
             }
 
@@ -50,7 +53,12 @@ namespace AdventureGame
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            Application.Exit();
+        }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

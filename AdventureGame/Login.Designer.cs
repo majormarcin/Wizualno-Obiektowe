@@ -72,6 +72,7 @@
             this.textBox_pass.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_pass.Location = new System.Drawing.Point(40, 303);
             this.textBox_pass.Name = "textBox_pass";
+            this.textBox_pass.PasswordChar = '*';
             this.textBox_pass.Size = new System.Drawing.Size(200, 13);
             this.textBox_pass.TabIndex = 2;
             // 
@@ -142,6 +143,7 @@
             this.MinimizeBox = false;
             this.Name = "Login";
             this.Text = "Login";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
