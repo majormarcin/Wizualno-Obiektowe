@@ -35,20 +35,23 @@ namespace AdventureGame
             //odpowiednik form1load
             //User[] us = new User[4];
             // us[0] = new User("admin", "abc123!", true);
+            logowanie();
+        }
+        private void logowanie()
+        {
             foreach (User u in list)
             {
-                if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text)==true)
+                if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text) == true)
                 {
-                    
+
                     this.Hide();
-                    Form1 f = new Form1(this,u.UserName,u.isAdmin);
+                    Form1 f = new Form1(u.UserName, u.isAdmin);
                     //f.Closed += (s, args) => this.Close();
                     f.Show();
                     break;
 
                 }
             }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -59,6 +62,14 @@ namespace AdventureGame
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void textBox_pass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                logowanie();
+            }
         }
     }
 }

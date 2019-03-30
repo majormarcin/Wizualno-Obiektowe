@@ -12,14 +12,14 @@ namespace AdventureGame
 {
     public partial class Form1 : Form
     {
-        Login logowanie;
-        public Form1(Login logowanie2,string UserName, bool isAdmin)
+
+        public Form1(string UserName, bool isAdmin)
         {
-            //logowanie = logowanie2;
+
             InitializeComponent();
             label1.Text = UserName;
             checkBox1.Checked = isAdmin;
-           //logowanie.Close();
+
         }
 
 
@@ -28,7 +28,7 @@ namespace AdventureGame
         {
             this.Hide();
             Form f = new Login();
-            f.Closed += (s, args) => this.Close();
+            
             f.Show();
         }
     }
