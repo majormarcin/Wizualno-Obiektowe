@@ -18,23 +18,15 @@ namespace AdventureGame
         List<User> list;
         public Login()
         {
-            //konstruktory klas
-            // u= new User("admin","abc123!",true);
             list = new List<User>();
             list.Add(new User("admin", "abc123", true));
             list.Add(new User("MZ", "TuJestSkomplikowaneHaslo", true));
             list.Add(new User("user", "user", false));
-
-            
-
             InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //odpowiednik form1load
-            //User[] us = new User[4];
-            // us[0] = new User("admin", "abc123!", true);
             logowanie();
         }
         private void logowanie()
@@ -46,10 +38,12 @@ namespace AdventureGame
 
                     this.Hide();
                     Form1 f = new Form1(u.UserName, u.isAdmin);
-                    //f.Closed += (s, args) => this.Close();
                     f.Show();
                     break;
 
+                }else if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text) == false)
+                {
+                    MessageBox.Show("Błędne dane logowania");
                 }
             }
         }

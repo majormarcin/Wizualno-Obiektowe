@@ -15,11 +15,9 @@ namespace AdventureGame
 
         public Form1(string UserName, bool isAdmin)
         {
-
             InitializeComponent();
-            label1.Text = UserName;
+            label1.Text = "Login: "+UserName;
             checkBox1.Checked = isAdmin;
-
         }
 
 
@@ -27,8 +25,7 @@ namespace AdventureGame
         public void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Hide();
-            Form f = new Login();
-            
+            Form f = new Login(); 
             f.Show();
         }
     }
