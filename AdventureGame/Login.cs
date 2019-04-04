@@ -15,13 +15,14 @@ namespace AdventureGame
 {
     public partial class Login : Form
     {
-        List<User> list;
+        public List<User> list;
         public Login()
         {
             list = new List<User>();
-            list.Add(new User("admin", "abc123", true));
+            list.Add(new User("Marcin", "Zelkowski", true));
             list.Add(new User("MZ", "TuJestSkomplikowaneHaslo", true));
             list.Add(new User("user", "user", false));
+
             InitializeComponent();
         }
 
@@ -41,7 +42,8 @@ namespace AdventureGame
                     f.Show();
                     break;
 
-                }else if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text) == false)
+                }
+                else if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text) == false)
                 {
                     MessageBox.Show("Błędne dane logowania");
                 }
