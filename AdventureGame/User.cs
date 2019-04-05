@@ -25,22 +25,91 @@ namespace AdventureGame
 
             this.UserName = UserName;
             // Sól (id_użytkownika+numer albumu+nazwisko).
-            byte[] salt = Encoding.ASCII.GetBytes(uid+"8442"+"Zelkowski");//zmieniona sól
+            byte[] salt = Encoding.UTF8.GetBytes(uid+"8442"+"Zelkowski");//zmieniona sól
             Rfc2898DeriveBytes crypt = new Rfc2898DeriveBytes(Password, salt);
             byte[] crypted = crypt.GetBytes(25);//bezpiecznehasło
-            this.Password = Encoding.ASCII.GetString(crypted);
+            this.Password = Convert.ToBase64String(crypted);
             this.isAdmin = isAdmin;
         }
-
-        //---------------------------
-        // zmienić kodowania tablic bajtów
-        //---------------------------        
-        public bool PassCrypt(string Pass)
+        //dodany override dla zapisu do pliku z użyciem tostring
+        public override string ToString()
         {
-            byte[] salt = Encoding.ASCII.GetBytes(uid + "8442" + "Zelkowski");
+            return $"{uid} {UserName} {Password} {isAdmin}";
+        }
+        //-------------------
+        //wypierdala pozostałe tabele w datagrid ? do naprawy
+        //-------------------
+        //public Guid uid2
+        //{
+        //    get
+        //    {
+        //        return uid;
+        //    }
+
+        //    set
+        //    {
+        //        this.uid = value;
+        //    }
+        //}
+
+
+        //username dla datagrida
+        public string UserName2
+        {
+            get
+            {
+                return UserName;
+            }
+
+            set
+            {
+                this.UserName = value;
+            }
+        }
+        //pass dla datagrida
+        public string Password2
+        {
+            get
+            {
+                return Password;
+            }
+
+            set
+            {
+                this.Password = NewPass(value);
+            }
+        }
+        //isAdmin dla datagrida
+        public bool isAdmin2
+        {
+            get
+            {
+                return isAdmin;
+            }
+
+            set
+            {
+                this.isAdmin = value;
+            }
+        }
+
+        //generowanie nowego hasła przy edycji użytkownika w datagrid 
+        public string NewPass(string Pass)
+        {
+            byte[] salt = Encoding.UTF8.GetBytes(uid + "8442" + "Zelkowski");
             Rfc2898DeriveBytes crypt = new Rfc2898DeriveBytes(Pass, salt);
             byte[] crypted = crypt.GetBytes(25);//bezpiecznehasło
-            string InPassword = Encoding.ASCII.GetString(crypted);
+            //string InPassword = Convert.ToBase64String(crypted);
+            //this.Password = Convert.ToBase64String(crypted);
+            return Convert.ToBase64String(crypted);
+        }
+
+        public bool PassCrypt(string Pass)
+        {
+            byte[] salt = Encoding.UTF8.GetBytes(uid + "8442" + "Zelkowski");
+            Rfc2898DeriveBytes crypt = new Rfc2898DeriveBytes(Pass, salt);
+            byte[] crypted = crypt.GetBytes(25);//bezpiecznehasło
+            string InPassword = Convert.ToBase64String(crypted);
             bool isCorrect=false;
             if (InPassword== Password)
             {

@@ -15,10 +15,10 @@ namespace AdventureGame
 {
     public partial class Login : Form
     {
-        public List<User> list;
+        public List<User> list= new List<User>();
         public Login()
         {
-            list = new List<User>();
+            
             list.Add(new User("Marcin", "Zelkowski", true));
             list.Add(new User("MZ", "TuJestSkomplikowaneHaslo", true));
             list.Add(new User("user", "user", false));
