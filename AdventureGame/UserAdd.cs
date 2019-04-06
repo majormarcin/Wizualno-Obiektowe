@@ -14,15 +14,26 @@ namespace AdventureGame
     {
         int x = 1;
         public BindingSource source = new BindingSource();
+
+        //public List<User> list = new List<User> { new User("Marcin", "Zelkowski", true) };
+      //  User u = new User();
+        Login l = new Login();
+        public List<User> list = new List<User> { };
         public UserAdd()
         {
-            InitializeComponent();
+            list = l.list;
+
+           
+        list.Add(new User("MZ", "MZ", true));
+        list.Add(new User("user", "user", false));
+
+        InitializeComponent();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Add("user" + x);
-            x++;
+            //listBox1.Items.Add("user" + x);
+            //x++;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -48,13 +59,16 @@ namespace AdventureGame
             //list = new List<User>();
             //list.Add(new User("Marcin", "Zelkowski", true));
             //dataGridView2.DataSource = list;
-
+            
             
             DataGridView dataGridView1 = new DataGridView();
             BindingSource bindingSource1 = new BindingSource();
-        List<User> list = new List<User> { new User("Marcin", "Zelkowski", true), new User("user", "user", true) };
-            source.Add(new User("Marcin", "Zelkowski", true));
-            source.Add(new User("test", "test", false));
+        //List<User> list = new List<User> { new User("test", "test", true), new User("user", "user", true) };
+            //source.Add(new User("Marcin", "Zelkowski", true));
+
+            source.DataSource = list;
+            //to było ok
+            //source.Add(new User("test", "test", false));
 
             dataGridView3.AutoGenerateColumns = false;
             bindingSource1.DataSource = list;
@@ -65,32 +79,30 @@ namespace AdventureGame
             DataGridViewColumn column = new DataGridViewTextBoxColumn();
             column.DataPropertyName = "UserName2";
             column.Name = "UserName";
+            
             dataGridView3.Columns.Add(column);
 
             column = new DataGridViewTextBoxColumn();
             column.DataPropertyName = "Password2";
             column.Name = "Password";
+            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView3.Columns.Add(column);
 
-             DataGridViewComboBoxColumn combo4 = new DataGridViewComboBoxColumn();
+            
+
+            DataGridViewComboBoxColumn combo4 = new DataGridViewComboBoxColumn();
             combo4.DataPropertyName = "isAdmin2";
             combo4.Name = "isAdmin";
             combo4.Items.AddRange(true, false);
             dataGridView3.Columns.Add(combo4);
 
-
-            // dataGridView2.DataSource = source;
-            //ogłem to to nie działa
-            //dataGridView3.Columns.Add("uid", "uid");
-            //dataGridView3.Columns.Add("UserName", "UserName");
-            //dataGridView3.Columns.Add("Password", "Password");
-            //dataGridView3.Columns.Add("isAdmin", "isAdmin");
-            //dataGridView3.DataSource = list;
-            //dataGridView3.Columns["uid"].DisplayIndex = 0;
-            //dataGridView3.Columns["UserName"].DisplayIndex = 1;
-            //dataGridView3.Columns["Password"].DisplayIndex = 2;
-            //dataGridView3.Columns["isAdmin"].DisplayIndex = 3;
-
+            column = new DataGridViewTextBoxColumn();
+            column.DataPropertyName = "uid2";
+            column.Name = "uid";
+            column.ReadOnly = true;
+            column.DefaultCellStyle.NullValue = Guid.NewGuid().ToString();
+            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView3.Columns.Add(column);
 
         }
 
@@ -100,6 +112,10 @@ namespace AdventureGame
             string Password = tbxUser.Text;
             bool isAdmin = cbxAdmin.Checked;
             source.Add(new User(UserName, Password, isAdmin));
+
+
+
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -121,7 +137,7 @@ namespace AdventureGame
             // List<Person> pList = new List<Person>();
             // Person p1 = new Person(nric.Text, name.Text);
             //pList.Add(p1);
-            const string sPath = "save.txt";
+            const string sPath = "MZ8442.bin";
 
             //System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
             using (System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath))
