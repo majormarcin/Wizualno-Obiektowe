@@ -12,7 +12,6 @@ namespace AdventureGame
 {
     public partial class UserAdd : Form
     {
-        int x = 1;
         public BindingSource source = new BindingSource();
 
         //public List<User> list = new List<User> { new User("Marcin", "Zelkowski", true) };
@@ -24,27 +23,26 @@ namespace AdventureGame
             list = l.list;
 
            
-        list.Add(new User("MZ", "MZ", true));
-        list.Add(new User("user", "user", false));
+        //list.Add(new User("MZ", "MZ", true));
+        //list.Add(new User("user", "user", false));
 
         InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //listBox1.Items.Add("user" + x);
-            //x++;
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedItem != null)
-                if (MessageBox.Show("Czy chcesz usunąć użytkownika " +
-                     listBox1.GetItemText(listBox1.SelectedItem), "Uwaga", MessageBoxButtons.YesNo,
-                     MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    listBox1.Items.Remove(listBox1.SelectedItem);
-                }
+            foreach (DataGridViewRow item in this.dataGridView3.SelectedRows)
+            {
+                dataGridView3.Rows.RemoveAt(item.Index);
+            }
+            //if (listBox1.SelectedItem != null)
+            //    if (MessageBox.Show("Czy chcesz usunąć użytkownika " +
+            //         listBox1.GetItemText(listBox1.SelectedItem), "Uwaga", MessageBoxButtons.YesNo,
+            //         MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        listBox1.Items.Remove(listBox1.SelectedItem);
+            //    }
         }
 
         private void UserAdd_FormClosing(object sender, FormClosingEventArgs e)
@@ -61,19 +59,19 @@ namespace AdventureGame
             //dataGridView2.DataSource = list;
             
             
-            DataGridView dataGridView1 = new DataGridView();
-            BindingSource bindingSource1 = new BindingSource();
+           // DataGridView dataGridView1 = new DataGridView();
+          //  BindingSource bindingSource1 = new BindingSource();
         //List<User> list = new List<User> { new User("test", "test", true), new User("user", "user", true) };
             //source.Add(new User("Marcin", "Zelkowski", true));
 
-            source.DataSource = list;
+            
             //to było ok
             //source.Add(new User("test", "test", false));
 
             dataGridView3.AutoGenerateColumns = false;
-            bindingSource1.DataSource = list;
+            //bindingSource1.DataSource = list;
             
-            dataGridView3.DataSource = source;
+            
             
 
             DataGridViewColumn column = new DataGridViewTextBoxColumn();
@@ -105,14 +103,21 @@ namespace AdventureGame
             dataGridView3.Columns.Add(column);
 
         }
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            source.DataSource = null;
+            //dataGridView3.DataSource = null;
+            source.DataSource = list;
+            dataGridView3.DataSource = source;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string UserName=tbxUser.Text;
             string Password = tbxUser.Text;
             bool isAdmin = cbxAdmin.Checked;
-            source.Add(new User(UserName, Password, isAdmin));
-
+            //source.Add(new User(UserName, Password, isAdmin));
+            list.Add(new User(UserName, Password, isAdmin));
 
 
 
@@ -156,6 +161,53 @@ namespace AdventureGame
             Form f = new Login(); 
             f.Show();
         }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            source.DataSource = null;
+            //dataGridView3.DataSource = null;
+            source.DataSource = list;
+            dataGridView3.DataSource = source;
+        }
+
+        private void UserAdd_Load(object sender, EventArgs e)
+        {
+            //ładowanie tabel dla datagrid
+            dataGridView3.AutoGenerateColumns = false;
+            //bindingSource1.DataSource = list;
+
+
+
+
+            DataGridViewColumn column = new DataGridViewTextBoxColumn();
+            column.DataPropertyName = "UserName2";
+            column.Name = "UserName";
+
+            dataGridView3.Columns.Add(column);
+
+            column = new DataGridViewTextBoxColumn();
+            column.DataPropertyName = "Password2";
+            column.Name = "Password";
+            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView3.Columns.Add(column);
+
+
+
+            DataGridViewComboBoxColumn combo4 = new DataGridViewComboBoxColumn();
+            combo4.DataPropertyName = "isAdmin2";
+            combo4.Name = "isAdmin";
+            combo4.Items.AddRange(true, false);
+            dataGridView3.Columns.Add(combo4);
+
+            column = new DataGridViewTextBoxColumn();
+            column.DataPropertyName = "uid2";
+            column.Name = "uid";
+            column.ReadOnly = true;
+            column.DefaultCellStyle.NullValue = Guid.NewGuid().ToString();
+            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView3.Columns.Add(column);
+        }
+
 
         //using przy używaniu streamódo pliku 
         //    try{

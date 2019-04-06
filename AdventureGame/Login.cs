@@ -17,7 +17,8 @@ namespace AdventureGame
     public partial class Login : Form
     {
 
-        public List<User> list= new List<User> { new User("M", "Z", true) };
+        public List<User> list= new List<User> {};
+        //public List<User> list = new List<User> { new User("M", "Z", true) };
         //List<User> list = new List<User> { new User("Marcin", "Zelkowski", true)};
         public Login()
         {
@@ -105,8 +106,10 @@ namespace AdventureGame
             }
             catch (FileNotFoundException ex)
             {
+                MessageBox.Show("Brak bazy użytkowników. Tylko predefiniowany dostęp");
+                //Console.WriteLine(ex.Message);
+                list.Add(new User("M", "Z", true));
 
-                Console.WriteLine(ex.Message);
             }
 
         }
