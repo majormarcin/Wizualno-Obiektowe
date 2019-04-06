@@ -18,15 +18,8 @@ namespace AdventureGame
     {
 
         public List<User> list= new List<User> {};
-        //public List<User> list = new List<User> { new User("M", "Z", true) };
-        //List<User> list = new List<User> { new User("Marcin", "Zelkowski", true)};
         public Login()
         {
-
-            // list.Add(new User("Marcin", "Zelkowski", true));
-            //list.Add(new User("MZ", "TuJestSkomplikowaneHaslo", true));
-            //list.Add(new User("user", "user", false));
-            //list = User.LoadUsers().ToList(List<User>);
             LoadUsers();
             InitializeComponent();
         }
@@ -72,25 +65,21 @@ namespace AdventureGame
                 logowanie();
             }
         }
+        //wczytanie użytkowników z pliku
         public void LoadUsers()
         {
-            //List<User> list = new List<User> { new User("Marcin", "Zelkowski", true) };
-
-            const string sPath = "MZ8442.bin";
-
+            //coś do czego wrzucimy linijki z pliku :D
             List<string> lines = new List<string>();
             try
             {
-                // Use using-keyword for disposing.
+                //using bo tak kazano :D 
                 using (StreamReader reader = new StreamReader("MZ8442.bin"))
                 {
-                    // Use while not null pattern in while loop.
+                    // coś na jedną linijkę tekstu
                     string line;
                     while ((line = reader.ReadLine()) != null)
                     {
-                        // Insert logic here.
-                        // ... The "line" variable is a line in the file.
-                        // ... Add it to our List.
+                        //wrzucenie linijki do tablicy linijek :D
                         lines.Add(line);
                     }
                 }
@@ -104,11 +93,11 @@ namespace AdventureGame
                     list.Add(new User(Guid.Parse(parm[0]), parm[1], parm[2], bool.Parse(parm[3])));
                 }
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException e)
             {
                 MessageBox.Show("Brak bazy użytkowników. Tylko predefiniowany dostęp");
-                //Console.WriteLine(ex.Message);
-                list.Add(new User("M", "Z", true));
+                //Console.WriteLine(e.Message);
+                list.Add(new User("Marcin", "Zelkowski", true));
 
             }
 

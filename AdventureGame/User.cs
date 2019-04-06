@@ -27,7 +27,7 @@ namespace AdventureGame
         {
             //3. w konstruktorze nie wykorzystywać funkcji skrótu hasła (Rfc2898DeriveBytes)
             this.uid = Guid.NewGuid();//generowanie guidu dla użytkownika 
-            Console.WriteLine("Guid: {0}", uid);//debug guidu
+            //Console.WriteLine("Guid: {0}", uid);//debug guidu
 
             this.UserName = UserName;
             // Sól (id_użytkownika+numer albumu+nazwisko).
@@ -104,7 +104,5 @@ namespace AdventureGame
             }
             return isCorrect;
         }
-       // public List<User> LoadUsers
-
     }
 }

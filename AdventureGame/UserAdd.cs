@@ -12,37 +12,24 @@ namespace AdventureGame
 {
     public partial class UserAdd : Form
     {
+        //źródło dla datagrida
         public BindingSource source = new BindingSource();
 
-        //public List<User> list = new List<User> { new User("Marcin", "Zelkowski", true) };
-      //  User u = new User();
         Login l = new Login();
         public List<User> list = new List<User> { };
         public UserAdd()
         {
             list = l.list;
-
-           
-        //list.Add(new User("MZ", "MZ", true));
-        //list.Add(new User("user", "user", false));
-
         InitializeComponent();
         }
 
-
+        //usuwanie wiersza grida
         private void button3_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow item in this.dataGridView3.SelectedRows)
             {
                 dataGridView3.Rows.RemoveAt(item.Index);
             }
-            //if (listBox1.SelectedItem != null)
-            //    if (MessageBox.Show("Czy chcesz usunąć użytkownika " +
-            //         listBox1.GetItemText(listBox1.SelectedItem), "Uwaga", MessageBoxButtons.YesNo,
-            //         MessageBoxIcon.Question) == DialogResult.Yes)
-            //    {
-            //        listBox1.Items.Remove(listBox1.SelectedItem);
-            //    }
         }
 
         private void UserAdd_FormClosing(object sender, FormClosingEventArgs e)
@@ -50,102 +37,36 @@ namespace AdventureGame
             Application.Exit();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //ogłem to to nie działa
-            //List<User> list;
-            //list = new List<User>();
-            //list.Add(new User("Marcin", "Zelkowski", true));
-            //dataGridView2.DataSource = list;
-            
-            
-           // DataGridView dataGridView1 = new DataGridView();
-          //  BindingSource bindingSource1 = new BindingSource();
-        //List<User> list = new List<User> { new User("test", "test", true), new User("user", "user", true) };
-            //source.Add(new User("Marcin", "Zelkowski", true));
-
-            
-            //to było ok
-            //source.Add(new User("test", "test", false));
-
-            dataGridView3.AutoGenerateColumns = false;
-            //bindingSource1.DataSource = list;
-            
-            
-            
-
-            DataGridViewColumn column = new DataGridViewTextBoxColumn();
-            column.DataPropertyName = "UserName2";
-            column.Name = "UserName";
-            
-            dataGridView3.Columns.Add(column);
-
-            column = new DataGridViewTextBoxColumn();
-            column.DataPropertyName = "Password2";
-            column.Name = "Password";
-            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView3.Columns.Add(column);
-
-            
-
-            DataGridViewComboBoxColumn combo4 = new DataGridViewComboBoxColumn();
-            combo4.DataPropertyName = "isAdmin2";
-            combo4.Name = "isAdmin";
-            combo4.Items.AddRange(true, false);
-            dataGridView3.Columns.Add(combo4);
-
-            column = new DataGridViewTextBoxColumn();
-            column.DataPropertyName = "uid2";
-            column.Name = "uid";
-            column.ReadOnly = true;
-            column.DefaultCellStyle.NullValue = Guid.NewGuid().ToString();
-            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView3.Columns.Add(column);
-
-        }
         private void button5_Click_1(object sender, EventArgs e)
         {
+            //odświeżenie danych poprzes zresetowanie ich
             source.DataSource = null;
             //dataGridView3.DataSource = null;
             source.DataSource = list;
             dataGridView3.DataSource = source;
         }
-
+        //dodawanie użytkownika
         private void button1_Click(object sender, EventArgs e)
         {
             string UserName=tbxUser.Text;
             string Password = tbxUser.Text;
             bool isAdmin = cbxAdmin.Checked;
-            //source.Add(new User(UserName, Password, isAdmin));
-            list.Add(new User(UserName, Password, isAdmin));
-
-
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //const string sPath = "save.txt";
-
-            //System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
-            //foreach (var item in source.IndexOf())
-            //{
-            //    SaveFile.WriteLine(item.ToString(), item.ToString());
-            //}
-            //SaveFile.Close();
-
-            //MessageBox.Show("Programs saved!");
+            bool uExist = false;
+            foreach (User u in list)
+            {
+                if (u.UserName == UserName)
+                {
+                    uExist = true;
+                }
+            }//zprawdzenie czy taki użytkownik już isjnieje
+            if (!uExist) list.Add(new User(UserName, Password, isAdmin));
+            else MessageBox.Show("Użytkownik już istnieje.");
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            // List<Person> pList = new List<Person>();
-            // Person p1 = new Person(nric.Text, name.Text);
-            //pList.Add(p1);
-            const string sPath = "MZ8442.bin";
-
-            //System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
-            using (System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath))
+            //zapis do pliku
+            using (System.IO.StreamWriter SaveFile = new System.IO.StreamWriter("MZ8442.bin"))
             {
                 foreach (User p in source)
                 {
@@ -172,12 +93,8 @@ namespace AdventureGame
 
         private void UserAdd_Load(object sender, EventArgs e)
         {
-            //ładowanie tabel dla datagrid
+            //ładowanie kolumn dla datagridview
             dataGridView3.AutoGenerateColumns = false;
-            //bindingSource1.DataSource = list;
-
-
-
 
             DataGridViewColumn column = new DataGridViewTextBoxColumn();
             column.DataPropertyName = "UserName2";
@@ -207,24 +124,5 @@ namespace AdventureGame
             column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView3.Columns.Add(column);
         }
-
-
-        //using przy używaniu streamódo pliku 
-        //    try{
-        //    File.WriteAllText("plik","text",Encoding,Default);
-        //        catch (InvalidOperationException err){//blad}
-
-        //}
-        //if(FileDialog.exist("plik"))
-        //try{
-        //    File.AppendAllLine("plik","text",Encoding,Default);
-        //        catch (InvalidOperationException err){//blad}
-
-        //}  konwertować do base64(tobase64string) i to do pliku  zamiast od ascii
-
-
-
-
-
     }
 }

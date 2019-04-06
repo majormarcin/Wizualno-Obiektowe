@@ -37,11 +37,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -55,7 +55,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1066, 426);
+            this.tabControl1.Size = new System.Drawing.Size(821, 418);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -70,7 +70,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1058, 400);
+            this.tabPage1.Size = new System.Drawing.Size(813, 392);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dodaj";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -99,6 +99,7 @@
             // 
             this.tbxPass.Location = new System.Drawing.Point(10, 73);
             this.tbxPass.Name = "tbxPass";
+            this.tbxPass.PasswordChar = '*';
             this.tbxPass.Size = new System.Drawing.Size(100, 20);
             this.tbxPass.TabIndex = 3;
             // 
@@ -137,14 +138,24 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1058, 400);
+            this.tabPage2.Size = new System.Drawing.Size(813, 392);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Edytuj";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(6, 6);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 15;
+            this.button5.Text = "Odśwież";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_1);
+            // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(980, 253);
+            this.button7.Location = new System.Drawing.Point(732, 6);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 13;
@@ -154,11 +165,11 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(6, 253);
+            this.button6.Location = new System.Drawing.Point(87, 6);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(169, 23);
+            this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 12;
-            this.button6.Text = "Zapisz do pliku";
+            this.button6.Text = "Zapisz";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -166,14 +177,14 @@
             // 
             this.dataGridView3.AllowUserToAddRows = false;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(6, 3);
+            this.dataGridView3.Location = new System.Drawing.Point(10, 35);
             this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(1046, 244);
+            this.dataGridView3.Size = new System.Drawing.Size(797, 354);
             this.dataGridView3.TabIndex = 10;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(181, 253);
+            this.button3.Location = new System.Drawing.Point(168, 6);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 3;
@@ -181,21 +192,11 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(262, 253);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "Odśwież";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click_1);
-            // 
             // UserAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1105, 450);
+            this.ClientSize = new System.Drawing.Size(840, 438);
             this.Controls.Add(this.tabControl1);
             this.MinimizeBox = false;
             this.Name = "UserAdd";
