@@ -26,9 +26,13 @@ namespace AdventureGame
         //usuwanie wiersza grida
         private void button3_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Czy chcesz usunac uzytkownika ?", "Ostrzeżenie!",MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question) == DialogResult.Yes)
+            {
             foreach (DataGridViewRow item in this.dataGridView3.SelectedRows)
             {
                 dataGridView3.Rows.RemoveAt(item.Index);
+            }
             }
         }
 
@@ -57,6 +61,7 @@ namespace AdventureGame
                 if (u.UserName == UserName)
                 {
                     uExist = true;
+                    break;
                 }
             }//zprawdzenie czy taki użytkownik już isjnieje
             if (!uExist) list.Add(new User(UserName, Password, isAdmin));
@@ -95,27 +100,20 @@ namespace AdventureGame
         {
             //ładowanie kolumn dla datagridview
             dataGridView3.AutoGenerateColumns = false;
-
             DataGridViewColumn column = new DataGridViewTextBoxColumn();
             column.DataPropertyName = "UserName2";
             column.Name = "UserName";
-
             dataGridView3.Columns.Add(column);
-
             column = new DataGridViewTextBoxColumn();
             column.DataPropertyName = "Password2";
             column.Name = "Password";
             column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView3.Columns.Add(column);
-
-
-
             DataGridViewComboBoxColumn combo4 = new DataGridViewComboBoxColumn();
             combo4.DataPropertyName = "isAdmin2";
             combo4.Name = "isAdmin";
             combo4.Items.AddRange(true, false);
             dataGridView3.Columns.Add(combo4);
-
             column = new DataGridViewTextBoxColumn();
             column.DataPropertyName = "uid2";
             column.Name = "uid";
