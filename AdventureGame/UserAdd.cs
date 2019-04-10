@@ -66,6 +66,17 @@ namespace AdventureGame
             }//zprawdzenie czy taki użytkownik już isjnieje
             if (!uExist) list.Add(new User(UserName, Password, isAdmin));
             else MessageBox.Show("Użytkownik już istnieje.");
+            source.DataSource = null;
+            //dataGridView3.DataSource = null;
+            source.DataSource = list;
+            using (System.IO.StreamWriter SaveFile = new System.IO.StreamWriter("MZ8442.bin"))
+            {
+                foreach (User p in source)
+                {
+                    SaveFile.WriteLine(p);
+                }
+                SaveFile.Close();
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
