@@ -16,7 +16,7 @@ namespace AdventureGame
 {
     public partial class Login : Form
     {
-
+        pinacolada escape = new pinacolada();
         public List<User> list= new List<User> {};
         public Login()
         {
@@ -30,22 +30,23 @@ namespace AdventureGame
         }
         private void logowanie()
         {
-            foreach (User u in list)
-            {
-                if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text) == true)
-                {
+            list = escape.Autoryzacja.Invoke(textBox_login.Text, textBox_pass.Text,list,this);
+            //foreach (User u in list)
+            //{
+            //    if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text) == true)
+            //    {
 
-                    this.Hide();
-                    Form1 f = new Form1(u.UserName, u.isAdmin);
-                    f.Show();
-                    break;
+            //        this.Hide();
+            //        Form1 f = new Form1(u.UserName, u.isAdmin);
+            //        f.Show();
+            //        break;
 
-                }
-                else if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text) == false)
-                {
-                    MessageBox.Show("Błędne dane logowania");
-                }
-            }
+            //    }
+            //    else if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text) == false)
+            //    {
+            //        MessageBox.Show("Błędne dane logowania");
+            //    }
+            //}
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -68,39 +69,8 @@ namespace AdventureGame
         //wczytanie użytkowników z pliku
         public void LoadUsers()
         {
-            //coś do czego wrzucimy linijki z pliku :D
-            List<string> lines = new List<string>();
-            try
-            {
-                //using bo tak kazano :D 
-                using (StreamReader reader = new StreamReader("MZ8442.bin"))
-                {
-                    // coś na jedną linijkę tekstu
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        //wrzucenie linijki do tablicy linijek :D
-                        lines.Add(line);
-                    }
-                }
-                
-                // Print out all the lines in the list.
-                foreach (string value in lines)
-                {
-                    Console.WriteLine(value);
-                    string[] parm = value.Split(' ');
-                    //splitowanie po spacji na tablise stringów
-                    list.Add(new User(Guid.Parse(parm[0]), parm[1], parm[2], bool.Parse(parm[3])));
-                }
-            }
-            catch (FileNotFoundException e)
-            {
-                MessageBox.Show("Brak bazy użytkowników. Tylko predefiniowany dostęp");
-                //Console.WriteLine(e.Message);
-                list.Add(new User("Marcin", "Zelkowski", true));
-
-            }
-
+            
+            list = escape.load.Invoke();
         }
     }
 }
