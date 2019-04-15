@@ -30,7 +30,7 @@ namespace AdventureGame
         }
         private void logowanie()
         {
-            list = escape.Autoryzacja.Invoke(textBox_login.Text, textBox_pass.Text,list,this);
+            escape.Autoryzacja.Invoke(textBox_login.Text, textBox_pass.Text,list,this);
             //foreach (User u in list)
             //{
             //    if (u.UserName == textBox_login.Text && u.PassCrypt(textBox_pass.Text) == true)

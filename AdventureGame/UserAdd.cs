@@ -13,7 +13,7 @@ namespace AdventureGame
     public partial class UserAdd : Form
     {
         //źródło dla datagrida
-        pinacolada pinacolada = new pinacolada();
+        pinacolada escape = new pinacolada();
         public BindingSource source = new BindingSource();
 
         Login l = new Login();
@@ -66,25 +66,26 @@ namespace AdventureGame
                 }
             }//zprawdzenie czy taki użytkownik już isjnieje
             if (!uExist) //list.Add(new User(UserName, Password, isAdmin));
-            list=pinacolada.UDodaj.Invoke(UserName, Password, isAdmin);
+            list=escape.UDodaj.Invoke(UserName, Password, isAdmin,list);
             else MessageBox.Show("Użytkownik już istnieje.");
             source.DataSource = null;
             //dataGridView3.DataSource = null;
             source.DataSource = list;
-            using (System.IO.StreamWriter SaveFile = new System.IO.StreamWriter("MZ8442.bin"))
-            {
-                foreach (User p in source)
-                {
-                    SaveFile.WriteLine(p);
-                }
-                SaveFile.Close();
-            }
+            //using (System.IO.StreamWriter SaveFile = new System.IO.StreamWriter("MZ8442.bin"))
+            //{
+            //    foreach (User p in source)
+            //    {
+            //        SaveFile.WriteLine(p);
+            //    }
+            //    SaveFile.Close();
+            //}
+            escape.Zapis.Invoke(list);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             //zapis do pliku
-            source = pinacolada.Zapis.Invoke(source);
+            escape.Zapis.Invoke(list);
         }
 
         private void button7_Click(object sender, EventArgs e)

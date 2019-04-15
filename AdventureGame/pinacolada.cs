@@ -14,13 +14,13 @@ namespace AdventureGame
         public delegate List<User> Load();
         public Load load;
         //public delegate List<User> Dodaj(string login,string password,bool isAdmin);
-        public delegate List<User> Aut(string x, string y, List<User> a, Form f);
+        public delegate void Aut(string x, string y, List<User> a, Form f);
         public Aut Autoryzacja;
 
-        public delegate List<User> Dodaj(string x, string y, bool a);
+        public delegate List<User> Dodaj(string x, string y, bool a, List<User> lista);
         public Dodaj UDodaj;
 
-        public delegate BindingSource SavePlik(BindingSource source);
+        public delegate void SavePlik(List<User> list);
         public SavePlik Zapis;
 
         public pinacolada()
@@ -70,15 +70,6 @@ namespace AdventureGame
                     MessageBox.Show("Plik uszkodzony");
 
             }
-
-            // Print out all the lines in the list.
-            //foreach (string value in lines)
-            //{
-            //    Console.WriteLine(value);
-            //    string[] parm = value.Split(' ');
-            //    //splitowanie po spacji na tablise stringów
-            //    list.Add(new User(Guid.Parse(parm[0]), parm[1], parm[2], bool.Parse(parm[3])));
-            //}
              }
             catch (FileNotFoundException e)
             {
@@ -90,32 +81,31 @@ namespace AdventureGame
             return list;
         }
         List<User> list = new List<User> { };
-        private List<User> Dodawanie(string x, string y, bool a)
+        private List<User> Dodawanie(string x, string y, bool a, List<User> lista)
         {
 
-            list.Add(new User(x, y, a));
-            return list;
+            lista.Add(new User(x, y, a));
+            return lista;
         }
 
-        private BindingSource ZapiszPlik(BindingSource source)
+        private void ZapiszPlik(List<User> list)
         {
-            List<User> list = new List<User> { };
             List<string> wiersze = new List<string>();
 
             using (System.IO.StreamWriter SaveFile = new System.IO.StreamWriter("MZ8442.bin"))
             {
-                foreach (User p in source)
+                foreach (User p in list)
                 {
                     SaveFile.WriteLine(p);
                 }
                 SaveFile.Close();
             }
-            return source;
+
         }
 
 
 
-        private List<User> Autoryzuj(string x, string y, List<User> Autoryzacja, Form f0)
+        private void Autoryzuj(string x, string y, List<User> Autoryzacja, Form f0)
         {
             foreach (User u in Autoryzacja)
             {
@@ -133,8 +123,6 @@ namespace AdventureGame
                     MessageBox.Show("Błędne Hasło", "Błąd logowania", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            return Autoryzacja;
-
         }
     }
     
